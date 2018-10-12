@@ -7,7 +7,12 @@
     }
 
     SubShader
-    {
+    {	
+		//MAKES HIGHLIGHT VISIBLE THROUGH OBJECTS
+		Cull Off
+		ZTest Always
+		ZWrite Off		
+		
         Tags
         {
             "Queue" = "Transparent"
@@ -15,6 +20,7 @@
             "RenderType" = "Transparent"
         }
 
+		
         // Fill the stencil buffer
         Pass
         {

@@ -59,7 +59,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\_MyAssets\Scripts\cubeRotator.cs" />
     <Compile Include="Assets\_MyAssets\Scripts\HandPointerManager.cs" />
+    <Compile Include="Assets\_MyAssets\Scripts\ObjectEditor.cs" />
     <Compile Include="Assets\Oculus\AudioManager\Scenes\Scripts\TestScript.cs" />
     <Compile Include="Assets\Oculus\AudioManager\Scripts\Audio\AmbienceEmitter.cs" />
     <Compile Include="Assets\Oculus\AudioManager\Scripts\Audio\AudioManager.cs" />
