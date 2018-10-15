@@ -4,7 +4,6 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - TeleportIgnore
   - Editable
   - Interactable
   - MaterialCube
@@ -17,8 +16,8 @@ TagManager:
   - UI
   - 
   - 
-  - PostProcessing
-  - MaterialOptions
+  - IgnoreTeleport
+  - 
   - 
   - 
   - 

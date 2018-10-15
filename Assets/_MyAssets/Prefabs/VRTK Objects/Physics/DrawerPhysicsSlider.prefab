@@ -235,7 +235,7 @@ GameObject:
   - component: {fileID: 114481978217080016}
   - component: {fileID: 114924133615154600}
   - component: {fileID: 54644172477322936}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CubeC
   m_TagString: Interactable
   m_Icon: {fileID: 0}
