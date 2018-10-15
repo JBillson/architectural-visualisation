@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4915834424027690}
-  - component: {fileID: 114937318692224850}
+  - component: {fileID: 114393146578708242}
   m_Layer: 0
   m_Name: Object Editor
   m_TagString: Untagged
@@ -40,7 +40,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114937318692224850
+--- !u!114 &114393146578708242
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -52,4 +52,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointer: {fileID: 0}
-  MaterialCubes: {fileID: 0}
+  MaterialCubePrefab: {fileID: 1603757340191844, guid: 2d8c5ff033bf1004285be6351c1b1247,
+    type: 2}
+  MaterialOptionsHolder: {fileID: 0}

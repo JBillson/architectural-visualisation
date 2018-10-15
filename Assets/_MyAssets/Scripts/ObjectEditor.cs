@@ -5,21 +5,23 @@ using UnityEngine;
 using VRTK;
 using VRTK.Highlighters;
 
-public class ObjectEditor : MonoBehaviour
+public class objectEditor : MonoBehaviour
 {
     public VRTK_Pointer pointer;
-    public GameObject MaterialCubes;
+
+    public GameObject MaterialCubePrefab;
+    public GameObject MaterialOptionsHolder;
 
     private GameObject currentSelected;
     private GameObject lastSelected;
-    private Color color;
+    private Color highlightColour;
+    private Vector3 pointPos;
 
     private void Start()
     {
-        MaterialCubes.SetActive(false);
         currentSelected = null;
         lastSelected = null;
-        color = Color.yellow;
+        highlightColour = Color.yellow;
     }
 
     //called from VRTK_ControllerEvents_UnityEvents on the RightControllerScriptAlias
@@ -39,7 +41,7 @@ public class ObjectEditor : MonoBehaviour
                 return;
 
             //Determine whether the object is being selected or deselected
-            if (currentSelected == lastSelected && MaterialCubes.activeInHierarchy == true)
+            if (currentSelected == lastSelected && currentSelected.GetComponent<VRTK_OutlineObjectCopyHighlighter>())
                 DeselectObject();
             else
                 SelectObject();
@@ -50,16 +52,17 @@ public class ObjectEditor : MonoBehaviour
     {
         if (lastSelected != null)
             RemoveObjectHighlighting(lastSelected);
-        
+
+        DestroyMaterialOptions();
         AddObjectHighlighting(currentSelected);
-        ShowMaterialOptions();
+        SpawnMaterialOptions();
         lastSelected = currentSelected;
     }
 
     private void DeselectObject()
     {
         RemoveObjectHighlighting(currentSelected);
-        HideMaterialOptions();
+        DestroyMaterialOptions();
         currentSelected = null;
         lastSelected = null;
     }
@@ -70,8 +73,7 @@ public class ObjectEditor : MonoBehaviour
         var outline = go.gameObject.AddComponent<VRTK_OutlineObjectCopyHighlighter>();
 
         outline.thickness = .4f;
-        //outline.enableSubmeshHighlight = true;        
-        objectHighlighter.Highlight(color);
+        objectHighlighter.Highlight(highlightColour);
 
     }
 
@@ -83,18 +85,61 @@ public class ObjectEditor : MonoBehaviour
         Destroy(outline);
     }
 
-    private void ShowMaterialOptions()
+    private void SpawnMaterialOptions()
     {
-        MaterialCubes.SetActive(true);
+        if (!currentSelected.GetComponent<objectMaterialOptions>() || currentSelected.GetComponent<objectMaterialOptions>().materials.Length == 0)
+        {
+            Debug.LogError("Object is editable but has no materials to change to");
+            return;
+        }   
+            
+        var numOfMaterials = currentSelected.GetComponent<objectMaterialOptions>().materials.Length;
+        for (int i = 0; i < numOfMaterials; i++)
+        {
+            float pointNum = (i * 1.0f) / numOfMaterials;
+            float angle = pointNum * Mathf.PI * 2;
+
+            var radius = 0f;
+
+            if (numOfMaterials < 4)
+                radius = .1f;
+            else
+                radius = .15f;
+
+
+            float x = Mathf.Sin(angle) * radius;
+            float y = Mathf.Cos(angle) * radius;
+
+            pointPos = new Vector3(x, 0, y) + MaterialOptionsHolder.transform.position;
+
+            var instance = Instantiate(MaterialCubePrefab, pointPos, Quaternion.identity, MaterialOptionsHolder.transform);
+            instance.tag = "MaterialCube";
+            var material = currentSelected.GetComponent<objectMaterialOptions>().materials[i];
+            instance.GetComponent<Renderer>().material = material;
+        }
     }
 
-    private void HideMaterialOptions()
+    private void DestroyMaterialOptions()
     {
-        MaterialCubes.SetActive(false);
+        foreach (Transform child in MaterialOptionsHolder.transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
     }
 
     private void ChangeMaterial(Material material)
     {
         lastSelected.GetComponent<Renderer>().material = material;
     }
+
+    private Vector3 RandomCircle(Vector3 center, float radius)
+    {
+        float ang = UnityEngine.Random.value * 360;
+        Vector3 pos;
+        pos.x = center.x + radius * Mathf.Sin(ang * Mathf.Deg2Rad);
+        pos.y = center.y + radius * Mathf.Cos(ang * Mathf.Deg2Rad);
+        pos.z = center.z;
+        return pos;
+    }
+
 }
