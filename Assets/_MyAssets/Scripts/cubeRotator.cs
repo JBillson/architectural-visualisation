@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using VRTK.Controllables.PhysicsBased;
 
-public class cubeRotator : MonoBehaviour
+public class CubeRotator : MonoBehaviour
 {
     public Axis axis = Axis.xAxis; 
      private void Update()

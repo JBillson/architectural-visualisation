@@ -121,7 +121,7 @@ public static class OVRInput
 		PrimaryTouchpad           = Button.PrimaryTouchpad,       ///< Maps to RawTouch: [LTrackedRemote, Touchpad: LTouchpad], [RTrackedRemote: RTouchpad], [Gamepad, Touch, LTouch, RTouch, Remote: None]
 		SecondaryIndexTrigger     = Button.SecondaryIndexTrigger, ///< Maps to RawTouch: [Touch: RIndexTrigger], [Gamepad, LTouch, RTouch, LTrackedRemote, RTrackedRemote, Touchpad, Remote: None]
 		SecondaryThumbstick       = Button.SecondaryThumbstick,   ///< Maps to RawTouch: [Touch: RThumbstick], [Gamepad, LTouch, RTouch, LTrackedRemote, RTrackedRemote, Touchpad, Remote: None]
-		SecondaryThumbRest        = 0x00100000,                   ///< Maps to RawTouch: [Touch: RThumbRest], [Gamepad, LTouch, RTouch, LTrackedRemote, RTrackedRemote, Touchpad, Remote: None]
+		PrimaryThumbrest        = 0x00100000,                   ///< Maps to RawTouch: [Touch: RThumbRest], [Gamepad, LTouch, RTouch, LTrackedRemote, RTrackedRemote, Touchpad, Remote: None]
 		SecondaryTouchpad         = Button.SecondaryTouchpad,     ///< Maps to RawTouch: [Gamepad, Touch, LTouch, RTouch, LTrackedRemote, RTrackedRemote, Touchpad, Remote: None]
 		Any                       = ~None,                        ///< Maps to RawTouch: [Touch, LTouch, RTouch, LTrackedRemote, RTrackedRemote, Touchpad: Any], [Gamepad, Remote: None]
 	}
@@ -1457,7 +1457,7 @@ public static class OVRInput
 					rawMask |= SecondaryIndexTrigger;
 				if ((virtualMask & Touch.SecondaryThumbstick) != 0)
 					rawMask |= SecondaryThumbstick;
-				if ((virtualMask & Touch.SecondaryThumbRest) != 0)
+				if ((virtualMask & Touch.PrimaryThumbrest) != 0)
 					rawMask |= SecondaryThumbRest;
 				if ((virtualMask & Touch.SecondaryTouchpad) != 0)
 					rawMask |= SecondaryTouchpad;

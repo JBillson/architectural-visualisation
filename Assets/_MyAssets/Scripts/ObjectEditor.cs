@@ -5,7 +5,7 @@ using UnityEngine;
 using VRTK;
 using VRTK.Highlighters;
 
-public class objectEditor : MonoBehaviour
+public class ObjectEditor : MonoBehaviour
 {
     public VRTK_Pointer pointer;
 
@@ -71,6 +71,7 @@ public class objectEditor : MonoBehaviour
     {
         var objectHighlighter = go.gameObject.AddComponent<VRTK_InteractObjectHighlighter>();
         var outline = go.gameObject.AddComponent<VRTK_OutlineObjectCopyHighlighter>();
+        var interactableObject = go.gameObject.AddComponent<VRTK_InteractableObject>();
 
         outline.thickness = .4f;
         objectHighlighter.Highlight(highlightColour);
@@ -81,19 +82,21 @@ public class objectEditor : MonoBehaviour
     {
         var objectHighlighter = go.gameObject.GetComponent<VRTK_InteractObjectHighlighter>();
         var outline = go.gameObject.GetComponent<VRTK_OutlineObjectCopyHighlighter>();
+        var interactableObject = go.gameObject.GetComponent<VRTK_InteractableObject>();
         Destroy(objectHighlighter);
         Destroy(outline);
+        Destroy(interactableObject);
     }
 
     private void SpawnMaterialOptions()
     {
-        if (!currentSelected.GetComponent<objectMaterialOptions>() || currentSelected.GetComponent<objectMaterialOptions>().materials.Length == 0)
+        if (!currentSelected.GetComponent<ObjectMaterialOptions>() || currentSelected.GetComponent<ObjectMaterialOptions>().materials.Length == 0)
         {
             Debug.LogError("Object is editable but has no materials to change to");
             return;
         }   
             
-        var numOfMaterials = currentSelected.GetComponent<objectMaterialOptions>().materials.Length;
+        var numOfMaterials = currentSelected.GetComponent<ObjectMaterialOptions>().materials.Length;
         for (int i = 0; i < numOfMaterials; i++)
         {
             float pointNum = (i * 1.0f) / numOfMaterials;
@@ -114,7 +117,7 @@ public class objectEditor : MonoBehaviour
 
             var instance = Instantiate(MaterialCubePrefab, pointPos, Quaternion.identity, MaterialOptionsHolder.transform);
             instance.tag = "MaterialCube";
-            var material = currentSelected.GetComponent<objectMaterialOptions>().materials[i];
+            var material = currentSelected.GetComponent<ObjectMaterialOptions>().materials[i];
             instance.GetComponent<Renderer>().material = material;
         }
     }
@@ -131,15 +134,4 @@ public class objectEditor : MonoBehaviour
     {
         lastSelected.GetComponent<Renderer>().material = material;
     }
-
-    private Vector3 RandomCircle(Vector3 center, float radius)
-    {
-        float ang = UnityEngine.Random.value * 360;
-        Vector3 pos;
-        pos.x = center.x + radius * Mathf.Sin(ang * Mathf.Deg2Rad);
-        pos.y = center.y + radius * Mathf.Cos(ang * Mathf.Deg2Rad);
-        pos.z = center.z;
-        return pos;
-    }
-
 }
