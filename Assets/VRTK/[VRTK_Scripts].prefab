@@ -170,7 +170,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4489454715680282}
-  - component: {fileID: 135583743240796116}
   - component: {fileID: 114103411074206060}
   - component: {fileID: 114358011859687596}
   - component: {fileID: 114364343943812282}
@@ -942,6 +941,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 382475077fafb8a4984305133e227986, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fistCollider: {fileID: 135930082623385638}
+  fingerCollider: {fileID: 136706209452013936}
 --- !u!114 &114439851309942624
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1511,18 +1512,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2173efc1f1a3dc84b95c54a94a41d11a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!135 &135583743240796116
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1764653810925492}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.05
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &135930082623385638
 SphereCollider:
   m_ObjectHideFlags: 1

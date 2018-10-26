@@ -310,12 +310,20 @@ namespace VRTK
             }
         }
 
+        private GameObject CustomColliders;
+
+
+        private void Start()
+        {
+            
+        }
+
         public virtual void OnInteractableObjectEnabled(InteractableObjectEventArgs e)
         {
             if (InteractableObjectEnabled != null)
             {
-                InteractableObjectEnabled(this, e);
-            }
+                InteractableObjectEnabled(this, e);                
+            }            
         }
 
         public virtual void OnInteractableObjectDisabled(InteractableObjectEventArgs e)
@@ -323,6 +331,7 @@ namespace VRTK
             if (InteractableObjectDisabled != null)
             {
                 InteractableObjectDisabled(this, e);
+               
             }
         }
 
@@ -347,6 +356,9 @@ namespace VRTK
             if (InteractableObjectTouched != null)
             {
                 InteractableObjectTouched(this, e);
+                CustomColliders = e.interactingObject.transform.Find("Custom Hand Colliders").gameObject;
+                if (CustomColliders != null)
+                    CustomColliders.SetActive(false);
             }
         }
 
@@ -355,6 +367,9 @@ namespace VRTK
             if (InteractableObjectUntouched != null)
             {
                 InteractableObjectUntouched(this, e);
+                CustomColliders = e.interactingObject.transform.Find("Custom Hand Colliders").gameObject;
+                if (CustomColliders != null)
+                    CustomColliders.SetActive(true);
             }
         }
 

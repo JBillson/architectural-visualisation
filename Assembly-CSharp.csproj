@@ -60,10 +60,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\_MyAssets\Scripts\CubeRotator.cs" />
+    <Compile Include="Assets\_MyAssets\Scripts\DistanceGrabber.cs" />
     <Compile Include="Assets\_MyAssets\Scripts\HandColliderManager.cs" />
     <Compile Include="Assets\_MyAssets\Scripts\HandStateManager.cs" />
     <Compile Include="Assets\_MyAssets\Scripts\ObjectEditor.cs" />
     <Compile Include="Assets\_MyAssets\Scripts\ObjectMaterialOptions.cs" />
+    <Compile Include="Assets\_MyAssets\Scripts\PointerManager.cs" />
     <Compile Include="Assets\Oculus\AudioManager\Scenes\Scripts\TestScript.cs" />
     <Compile Include="Assets\Oculus\AudioManager\Scripts\Audio\AmbienceEmitter.cs" />
     <Compile Include="Assets\Oculus\AudioManager\Scripts\Audio\AudioManager.cs" />

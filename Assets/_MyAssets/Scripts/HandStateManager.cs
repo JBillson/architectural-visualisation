@@ -5,16 +5,16 @@ using VRTK;
 
 public class HandStateManager : MonoBehaviour
 {
-    private HandState handState = HandState.Open;
+    public HandState handState = HandState.Open;
     private VRTK_ControllerEvents cE;
     private HandColliderManager hcm;
-
+    
     private void Start()
     {
-        cE = GetComponent<VRTK_ControllerEvents>();
+        cE = GetComponentInParent<VRTK_ControllerEvents>();
         hcm = GetComponentInChildren<HandColliderManager>();
     }
-
+  
     public void Update()
     {        
         if (!cE.gripPressed)
@@ -39,15 +39,15 @@ public class HandStateManager : MonoBehaviour
                 Point();
             else
                 PointWithThumbUp();
-        }
+        }        
     }
+    
 
     private void CloseHands()
     {
         if (handState == HandState.Closed)
             return;
-
-        print("Closed Hands");
+      
         handState = HandState.Closed;
         hcm.FistColliderOn();
         hcm.FingerColliderOff();
@@ -58,7 +58,6 @@ public class HandStateManager : MonoBehaviour
         if (handState == HandState.Open)
             return;
 
-        print("Opened Hands");
         handState = HandState.Open;
         hcm.CollidersOff();
     }
@@ -68,7 +67,6 @@ public class HandStateManager : MonoBehaviour
         if (handState == HandState.Point)
             return;
 
-        print("Pointing");
         handState = HandState.Point;
         hcm.FistColliderOff();
         hcm.FingerColliderOn();        
@@ -79,7 +77,6 @@ public class HandStateManager : MonoBehaviour
         if (handState == HandState.ThumbUp)
             return;
 
-        print("Thumb Up");
         handState = HandState.ThumbUp;
     }
 
@@ -88,7 +85,6 @@ public class HandStateManager : MonoBehaviour
         if (handState == HandState.PointWithThumbUp)
             return;
 
-        print("Pointing With Thumb Up");
         handState = HandState.PointWithThumbUp;
         hcm.FistColliderOff();
         hcm.FingerColliderOn();
@@ -99,7 +95,6 @@ public class HandStateManager : MonoBehaviour
         if (handState == HandState.Pinch)
             return;
 
-        print("Pinching");
         handState = HandState.Pinch;
         hcm.CollidersOff();
     }
