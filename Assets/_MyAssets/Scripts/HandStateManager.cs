@@ -16,7 +16,7 @@ public class HandStateManager : MonoBehaviour
     }
   
     public void Update()
-    {        
+    {       
         if (!cE.gripPressed)
         {
             if (cE.triggerPressed && (cE.touchpadTouched || cE.buttonOneTouched || cE.buttonTwoTouched || OVRInput.Get(OVRInput.Touch.PrimaryThumbRest)))
@@ -42,7 +42,6 @@ public class HandStateManager : MonoBehaviour
         }        
     }
     
-
     private void CloseHands()
     {
         if (handState == HandState.Closed)

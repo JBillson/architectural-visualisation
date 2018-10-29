@@ -10,6 +10,8 @@
         public Text displayText;
         public string outputOnMax = "Maximum Reached";
         public string outputOnMin = "Minimum Reached";
+        private ButtonCtrl ctrl;
+        private bool isPressed = false;
 
         protected virtual void OnEnable()
         {
@@ -17,6 +19,7 @@
             controllable.ValueChanged += ValueChanged;
             controllable.MaxLimitReached += MaxLimitReached;
             controllable.MinLimitReached += MinLimitReached;
+            ctrl = GetComponent<ButtonCtrl>();
         }
 
         protected virtual void ValueChanged(object sender, ControllableEventArgs e)
@@ -28,18 +31,23 @@
         }
 
         protected virtual void MaxLimitReached(object sender, ControllableEventArgs e)
-        {
+        {                        
+            if (!isPressed)
+                ctrl.Pressed();
+            isPressed = true;
+
             if (outputOnMax != "")
             {
-                Debug.Log(outputOnMax);
+                              
             }
         }
 
         protected virtual void MinLimitReached(object sender, ControllableEventArgs e)
         {
+            isPressed = false;
             if (outputOnMin != "")
             {
-                Debug.Log(outputOnMin);
+                
             }
         }
     }
