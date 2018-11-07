@@ -11,10 +11,10 @@ public class ObjectEditor : MonoBehaviour
 
     public GameObject MaterialCubePrefab;
     public GameObject MaterialOptionsHolder;
+    private Color highlightColour;
 
     private GameObject currentSelected;
     private GameObject lastSelected;
-    private Color highlightColour;
     private Vector3 pointPos;
 
     private void Start()
@@ -34,7 +34,10 @@ public class ObjectEditor : MonoBehaviour
 
             //changeObjectMaterial if currentSelected is a "MaterialCube"
             if (currentSelected.CompareTag("MaterialCube"))
+            {
                 ChangeMaterial(currentSelected.GetComponent<Renderer>().material);
+            }
+
 
             //return if object isn't "Editable"
             if (!currentSelected.CompareTag("Editable"))
@@ -59,9 +62,10 @@ public class ObjectEditor : MonoBehaviour
         lastSelected = currentSelected;
     }
 
-    private void DeselectObject()
+    public void DeselectObject()
     {
         RemoveObjectHighlighting(currentSelected);
+        RemoveObjectHighlighting(lastSelected);
         DestroyMaterialOptions();
         currentSelected = null;
         lastSelected = null;
@@ -80,12 +84,24 @@ public class ObjectEditor : MonoBehaviour
 
     private void RemoveObjectHighlighting(GameObject go)
     {
-        var objectHighlighter = go.gameObject.GetComponent<VRTK_InteractObjectHighlighter>();
-        var outline = go.gameObject.GetComponent<VRTK_OutlineObjectCopyHighlighter>();
-        var interactableObject = go.gameObject.GetComponent<VRTK_InteractableObject>();
-        Destroy(objectHighlighter);
-        Destroy(outline);
-        Destroy(interactableObject);
+        // ....HOW DO YOU DO A NULL CHECK BECAUSE IT STILL GIVES NULL REFERENCE EXCEPTION.... //
+        if (go.gameObject.GetComponent<VRTK_InteractObjectHighlighter>() != null)
+        {
+            var objectHighlighter = go.gameObject.GetComponent<VRTK_InteractObjectHighlighter>();
+            Destroy(objectHighlighter);
+        }
+
+        if (go.gameObject.GetComponent<VRTK_OutlineObjectCopyHighlighter>() != null)
+        {
+            var outline = go.gameObject.GetComponent<VRTK_OutlineObjectCopyHighlighter>();
+            Destroy(outline);
+        }
+        
+        if (go.gameObject.GetComponent<VRTK_InteractableObject>() != null)
+        {
+            var interactableObject = go.gameObject.GetComponent<VRTK_InteractableObject>();
+            Destroy(interactableObject);
+        }                        
     }
 
     private void SpawnMaterialOptions()
@@ -94,8 +110,9 @@ public class ObjectEditor : MonoBehaviour
         {
             Debug.LogError("Object is editable but has no materials to change to");
             return;
-        }   
-            
+        }
+
+        MaterialOptionsHolder.SetActive(true);
         var numOfMaterials = currentSelected.GetComponent<ObjectMaterialOptions>().materials.Length;
         for (int i = 0; i < numOfMaterials; i++)
         {

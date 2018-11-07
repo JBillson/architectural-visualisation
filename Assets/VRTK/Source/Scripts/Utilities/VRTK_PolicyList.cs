@@ -99,7 +99,7 @@ namespace VRTK
 
         protected virtual bool ScriptCheck(GameObject obj, bool returnState)
         {
-            for(int i = 0; i < identifiers.Count; i++)
+            for (int i = 0; i < identifiers.Count; i++)
             {
                 if (obj.GetComponent(identifiers[i]))
                 {
@@ -112,11 +112,17 @@ namespace VRTK
         protected virtual bool TagCheck(GameObject obj, bool returnState)
         {
             if (returnState)
-            {
+            {                                                                
                 return identifiers.Contains(obj.tag);
             }
             else
             {
+                /*
+                foreach (var identifier in identifiers)
+                {                    
+                    return obj.HasTag(identifier);
+                } 
+                */
                 return !identifiers.Contains(obj.tag);
             }
         }

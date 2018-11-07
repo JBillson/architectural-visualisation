@@ -8,13 +8,14 @@ public class MenuBarManager : MonoBehaviour
 {
     public GameObject MenuBar;
     private bool isShowing = true;
-    private GameObject player;
+    private GameObject player;    
 
     private void Start()
     {        
         if (MenuBar == null)
-            MenuBar = transform.Find("MenuBarHolder").gameObject;
-        HideMenuBar();        
+            MenuBar = transform.Find("MenuBarHolder").gameObject;                
+
+        HideMenuBar();
     }
 
     private void Update()
@@ -32,9 +33,9 @@ public class MenuBarManager : MonoBehaviour
     {
         player = VRTK_DeviceFinder.DeviceTransform(VRTK_DeviceFinder.Devices.Headset).gameObject;
         isShowing = true;
-        MenuBar.SetActive(true);
+        MenuBar.SetActive(true);        
         MenuBar.transform.position = player.transform.position;
-        MenuBar.transform.position += new Vector3(0, -0.3f, 1f);
+        MenuBar.transform.position += new Vector3(0, -0.5f, 0.5f);        
     }
 
     private void HideMenuBar()

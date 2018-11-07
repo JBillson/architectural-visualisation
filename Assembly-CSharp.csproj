@@ -67,7 +67,10 @@
     <Compile Include="Assets\_MyAssets\Scripts\MenuBarManager.cs" />
     <Compile Include="Assets\_MyAssets\Scripts\ObjectEditor.cs" />
     <Compile Include="Assets\_MyAssets\Scripts\ObjectMaterialOptions.cs" />
+    <Compile Include="Assets\_MyAssets\Scripts\OculusPersonalAvatar.cs" />
     <Compile Include="Assets\_MyAssets\Scripts\PointerManager.cs" />
+    <Compile Include="Assets\MultiTags\MultiTags.cs" />
+    <Compile Include="Assets\MultiTags\Testing\TestTags.cs" />
     <Compile Include="Assets\Oculus\AudioManager\Scenes\Scripts\TestScript.cs" />
     <Compile Include="Assets\Oculus\AudioManager\Scripts\Audio\AmbienceEmitter.cs" />
     <Compile Include="Assets\Oculus\AudioManager\Scripts\Audio\AudioManager.cs" />
@@ -755,6 +758,7 @@
     <None Include="Assets\Oculus\VR\Shaders\Unlit Crosshair.shader" />
     <None Include="Assets\Oculus\Avatar\Resources\Materials\AvatarSurfaceShaderSelfOccluding.shader" />
     <None Include="Assets\Oculus\VR\Resources\Unlit Transparent Color.shader" />
+    <None Include="Assets\MultiTags\DocumentationReadMe.txt" />
     <None Include="Assets\Oculus\Avatar\Resources\Materials\AvatarSurfaceShaderPBS.shader" />
     <None Include="Assets\Oculus\VR\Resources\OVRMRCameraFrameLit.shader" />
     <None Include="Assets\Oculus\Avatar\Samples\SocialStarter\README.txt" />
